@@ -5,14 +5,12 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"time"
 
 	"github.com/getlantern/golog"
 )
 
 const (
 	geoServeEndpoint = `http://geo.getiantem.org/lookup/%s`
-	geoLookupTimeout = 20 * time.Second
 )
 
 var (
@@ -107,7 +105,6 @@ func LookupIPWithClient(ipAddr string, httpClient *http.Client) (*City, error) {
 		log.Trace("Using default http.Client")
 		httpClient = defaultHttpClient
 	}
-	httpClient.Timeout = geoLookupTimeout
 
 	var err error
 	var req *http.Request
